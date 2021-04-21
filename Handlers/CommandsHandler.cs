@@ -15,6 +15,9 @@ namespace LeTwitchBot.Handlers
         public CommandsHandler(TwitchClient client)
         {
             _client = client;
+
+            _client.OnChatCommandReceived += OnChatCommandReceived;
+
         }
 
         public void OnChatCommandReceived(object sender, OnChatCommandReceivedArgs e)
