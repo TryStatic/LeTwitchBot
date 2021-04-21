@@ -2,9 +2,6 @@
 using System.Threading.Tasks;
 using LeTwitchBot.Handlers;
 using LeTwitchBot.Utilities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration.UserSecrets;
-using Newtonsoft.Json;
 using TwitchLib.Api;
 using TwitchLib.Client;
 using TwitchLib.Client.Events;
@@ -44,7 +41,7 @@ namespace LeTwitchBot
                 return;
             }
 
-            CommandsHandler = new CommandsHandler(Client);
+            CommandsHandler = new CommandsHandler(Client, API);
             VisitorTracker = new VisitorTracker(Client, API);
 
             Client.OnLog += OnLog;

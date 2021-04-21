@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using LeTwitchBot.Data;
+using LeTwitchBot.Data.Models;
 using TwitchLib.Api;
 using TwitchLib.Api.Helix.Models.Users.GetUsers;
 using TwitchLib.Client;
@@ -11,8 +12,7 @@ namespace LeTwitchBot.Handlers
 {
     internal class VisitorTracker
     {
-        public TwitchAPI API { get; set; }
-
+        private TwitchAPI API { get; set; }
         private TwitchClient Client { get; set; }
 
         public VisitorTracker(TwitchClient client, TwitchAPI api)

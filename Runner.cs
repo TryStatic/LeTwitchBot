@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using LeTwitchBot.Data;
 using LeTwitchBot.Utilities;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 namespace LeTwitchBot
 {

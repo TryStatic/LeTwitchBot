@@ -15,6 +15,7 @@ namespace LeTwitchBot.Utilities
         public string RedirectUrl { get; set; }
         public string Oauth { get; set; }
         public string ChannelName { get; set; }
+
         private Secrets()
         {
             

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Media;
+using TwitchLib.Api;
 using TwitchLib.Client;
 using TwitchLib.Client.Events;
 
@@ -11,9 +12,11 @@ namespace LeTwitchBot.Handlers
     internal class CommandsHandler
     {
         private readonly TwitchClient _client;
+        private readonly TwitchAPI _API;
 
-        public CommandsHandler(TwitchClient client)
+        public CommandsHandler(TwitchClient client, TwitchAPI api)
         {
+            _API = api;
             _client = client;
 
             _client.OnChatCommandReceived += OnChatCommandReceived;
@@ -31,11 +34,24 @@ namespace LeTwitchBot.Handlers
                 case "sound":
                     HandlePlaySound(sender, e);
                     break;
+                case "title":
+                    HandleChangeTitle(sender, e);
+                    break;
             }
         }
 
+        private void HandleChangeTitle(object sender, OnChatCommandReceivedArgs e)
+        {
+            if (!(sender is TwitchClient senderClient)) return;
 
-        private void HandleDiceRoll(object sender, OnChatCommandReceivedArgs onChatCommandReceivedArgs)
+            string newTitle = e.Command.ArgumentsAsString;
+            Console.WriteLine(newTitle);
+
+            if(newTitle == null || newTitle.Length <= 0) return;
+        }
+
+
+        private void HandleDiceRoll(object sender, OnChatCommandReceivedArgs e)
         {
             if (!(sender is TwitchClient senderClient)) return;
             _client.SendMessage(_client.JoinedChannels.First(), $"Hey {senderClient.TwitchUsername}! You rolled {new Random().Next(1, 7)}!");
