@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LeTwitchBot.Data;
 using LeTwitchBot.Data.Models;
-using TwitchLib.Api;
+using LeTwitchBot.Utilities;
 using TwitchLib.Api.Helix.Models.Users.GetUsers;
 using TwitchLib.Client;
 using TwitchLib.Client.Events;
@@ -12,34 +12,19 @@ namespace LeTwitchBot.Handlers
 {
     internal class VisitorTracker
     {
-        private TwitchAPI API { get; set; }
-        private TwitchClient Client { get; set; }
-
-        public VisitorTracker(TwitchClient client, TwitchAPI api)
+        public VisitorTracker()
         {
-            API = api;
-            Client = client;
-
-
-            client.OnUserJoined += OnUserJoined;
-            client.OnUserLeft += OnUserLeft;
-        }
-
-
-        private void OnUserLeft(object sender, OnUserLeftArgs e)
-        {
-            if (!(sender is TwitchClient senderClient)) return;
+            LeTwitchBot.TwitchClient.OnUserJoined += OnUserJoined;
         }
 
         private async void OnUserJoined(object sender, OnUserJoinedArgs e)
         {
             if (!(sender is TwitchClient senderClient)) return;
 
-            GetUsersResponse resp = await API.Helix.Users.GetUsersAsync(null, new List<string> { senderClient.TwitchUsername });
+            GetUsersResponse resp = await LeTwitchBot.BotAPI.Helix.Users.GetUsersAsync(null, new List<string> { senderClient.TwitchUsername });
             if (resp.Users.Length <= 0) return;
 
             User user = resp.Users[0];
-
 
             int userid = int.Parse(user.Id);
 
@@ -78,7 +63,7 @@ namespace LeTwitchBot.Handlers
 
             if (existingVisitor == null)
             {
-                Client.SendMessage(Client.JoinedChannels.First(), $"{senderClient.TwitchUsername} joined the stream for the first time. Welcome!!");
+                LeTwitchBot.TwitchClient.SendHostChannelMessage($"{senderClient.TwitchUsername} joined the stream for the first time. Welcome!!");
             }
         }
 

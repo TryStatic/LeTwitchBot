@@ -23,97 +23,55 @@
     <None Update="secrets.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Soundeffects\bruh.wav">
+    <None Update="Assets\Soundeffects\bruh.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\bye.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\bye.wav">
+    <None Update="Assets\Soundeffects\bye.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\clap.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\clap.wav">
+    <None Update="Assets\Soundeffects\clap.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Soundeffects\excellent.wav">
+    <None Update="Assets\Soundeffects\excellent.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\fail.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\fail.wav">
+    <None Update="Assets\Soundeffects\fail.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Soundeffects\fail2.wav">
+    <None Update="Assets\Soundeffects\fail2.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\godno.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\godno.wav">
+    <None Update="Assets\Soundeffects\godno.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\hs.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\hs.wav">
+    <None Update="Assets\Soundeffects\hs.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\nani.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\nani.wav">
+    <None Update="Assets\Soundeffects\nani.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\pika.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\pika.wav">
+    <None Update="Assets\Soundeffects\pika.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\pokelvlup.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\pokelvlup.wav">
+    <None Update="Assets\Soundeffects\pokelvlup.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\run.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\run.wav">
+    <None Update="Assets\Soundeffects\run.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\wasted.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\wasted.wav">
+    <None Update="Assets\Soundeffects\wasted.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\watitis.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\watitis.wav">
+    <None Update="Assets\Soundeffects\watitis.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\wrong.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="soundeffects\wrong.swf.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\wrong.wav">
+    <None Update="Assets\Soundeffects\wrong.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="soundeffects\yay.mp3">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Soundeffects\yay.wav">
+    <None Update="Assets\Soundeffects\yay.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Soundeffects\yo.wav">
+    <None Update="Assets\Soundeffects\yo.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
