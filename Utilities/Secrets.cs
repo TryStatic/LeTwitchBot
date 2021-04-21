@@ -10,11 +10,15 @@ namespace LeTwitchBot.Utilities
     {
         private static Secrets _instance;
 
-        public string ClientID { get; set; }
-        public string ClientSecret { get; set; }
-        public string RedirectUrl { get; set; }
-        public string Oauth { get; set; }
-        public string ChannelName { get; set; }
+        public string BotClientID { get; set; }
+        public string BotClientSecret { get; set; }
+        public string BotApplicationRedirectUrl { get; set; }
+        public string BotTMIOAuthKey { get; set; }
+
+        public string HostChannelName { get; set; }
+        public string HostClientID { get; set; }
+        public string HostClientSecret { get; set; }
+        public string HostApplicationRedirectUrl { get; set; }
 
         private Secrets()
         {

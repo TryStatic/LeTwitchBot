@@ -24,16 +24,16 @@ namespace LeTwitchBot
         public static async Task Init(Secrets secrets)
         {
             Secrets = secrets;
-            Credentials = new ConnectionCredentials(secrets.ChannelName, secrets.Oauth);
+            Credentials = new ConnectionCredentials(secrets.HostChannelName, secrets.BotTMIOAuthKey);
             Client = new TwitchClient();
 
-            Client.Initialize(Credentials, secrets.ChannelName);
+            Client.Initialize(Credentials, secrets.HostChannelName);
             Client.Connect();
 
 
             API = new TwitchAPI();
-            API.Settings.ClientId = Secrets.ClientID;
-            API.Settings.Secret = secrets.ClientSecret;
+            API.Settings.ClientId = Secrets.BotClientID;
+            API.Settings.Secret = secrets.BotClientSecret;
 
             if (!Client.IsConnected)
             {
