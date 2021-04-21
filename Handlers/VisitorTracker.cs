@@ -29,8 +29,6 @@ namespace LeTwitchBot.Handlers
         private void OnUserLeft(object sender, OnUserLeftArgs e)
         {
             if (!(sender is TwitchClient senderClient)) return;
-
-            Client.SendMessage(Client.JoinedChannels.First(), $"{senderClient.TwitchUsername} left BibleThump BibleThump BibleThump !!");
         }
 
         private async void OnUserJoined(object sender, OnUserJoinedArgs e)
