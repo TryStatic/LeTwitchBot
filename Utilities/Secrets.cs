@@ -19,6 +19,7 @@ namespace LeTwitchBot.Utilities
         public string HostClientID { get; set; }
         public string HostClientSecret { get; set; }
         public string HostApplicationRedirectUrl { get; set; }
+        public string HostChannelUserToken { get; set; }
 
         private Secrets()
         {
