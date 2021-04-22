@@ -133,9 +133,14 @@ namespace LeTwitchBot.Handlers
             LeTwitchBot.TwitchClient.SendHostChannelMessage($"Hey {senderClient.TwitchUsername}! You rolled {_random.Next(1, 7)}!");
         }
 
+        private static DateTime _lastSoundInvoke = DateTime.MinValue;
+        private static bool notifySent = false;
+        private static bool soundsEnabled = false;
         private void HandlePlaySoundCmd(object sender, OnChatCommandReceivedArgs e)
         {
             if (!(sender is TwitchClient senderClient)) return;
+
+            if (!soundsEnabled && !senderClient.TwitchUsername.ToLower().Equals(LeTwitchBot.HostChannelName.ToLower())) return;
 
             List<string> effects = new List<string>();
             string[] files = Directory.GetFiles(@"Assets\Soundeffects");
@@ -148,17 +153,49 @@ namespace LeTwitchBot.Handlers
             if (e.Command.ArgumentsAsList.Count == 0)
             {
                 LeTwitchBot.TwitchClient.SendHostChannelMessage($"!sound [name] (names: {string.Join(' ', effects)})");
+                return;
             }
-            else if (effects.Contains(e.Command.ArgumentsAsList[0]))
+
+            if (e.Command.ArgumentsAsList[0].Equals("enable", StringComparison.InvariantCultureIgnoreCase))
             {
-                int index = effects.FindIndex(0, p => p == e.Command.ArgumentsAsList[0]);
-                using SoundPlayer player = new SoundPlayer(@"Assets\Soundeffects\" + $"{effects[index]}.wav");
-                player.Play();
+                soundsEnabled = true;
+                LeTwitchBot.TwitchClient.SendHostChannelMessage($"{senderClient.TwitchUsername} has enabled !sound for everyone >( >( >( >(");
+                return;
             }
-            else
+
+            if (e.Command.ArgumentsAsList[0].Equals("disable", StringComparison.InvariantCultureIgnoreCase))
             {
-                LeTwitchBot.TwitchClient.SendHostChannelMessage($"Can't find that effect NotLikeThis NotLikeThis NotLikeThis @{senderClient.TwitchUsername}");
+                soundsEnabled = false;
+                LeTwitchBot.TwitchClient.SendHostChannelMessage($"{senderClient.TwitchUsername} has disabled !sound  :\\ :\\ :\\ :\\ ");
+                return;
             }
+
+
+            if (!effects.Contains(e.Command.ArgumentsAsList[0]))
+            {
+                LeTwitchBot.TwitchClient.SendHostChannelMessage(
+                    $"Can't find that effect NotLikeThis NotLikeThis NotLikeThis @{senderClient.TwitchUsername}");
+                return;
+            }
+
+            if (DateTime.Now.Subtract(_lastSoundInvoke).TotalSeconds < 10)
+            {
+                if (!notifySent)
+                {
+                    LeTwitchBot.TwitchClient.SendHostChannelMessage($"{senderClient.TwitchUsername} No spam on teh sounds plz ok?! cmonBruh cmonBruh cmonBruh cmonBruh cmonBruh");
+                }
+
+                notifySent = true;
+                return;
+            }
+
+            _lastSoundInvoke = DateTime.Now;
+            notifySent = false;
+
+
+            int index = effects.FindIndex(0, p => p == e.Command.ArgumentsAsList[0]);
+            using SoundPlayer player = new SoundPlayer(@"Assets\Soundeffects\" + $"{effects[index]}.wav");
+            player.Play();
         }
     }
 }
