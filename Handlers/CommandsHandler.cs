@@ -140,7 +140,9 @@ namespace LeTwitchBot.Handlers
         {
             if (!(sender is TwitchClient senderClient)) return;
 
-            if (!soundsEnabled && !senderClient.TwitchUsername.ToLower().Equals(LeTwitchBot.HostChannelName.ToLower())) return;
+            bool isHost = senderClient.TwitchUsername.ToLower().Equals(LeTwitchBot.HostChannelName.ToLower());
+
+            if (!soundsEnabled && !isHost) return;
 
             List<string> effects = new List<string>();
             string[] files = Directory.GetFiles(@"Assets\Soundeffects");
@@ -178,7 +180,7 @@ namespace LeTwitchBot.Handlers
                 return;
             }
 
-            if (DateTime.Now.Subtract(_lastSoundInvoke).TotalSeconds < 10)
+            if (DateTime.Now.Subtract(_lastSoundInvoke).TotalSeconds < 10 && !isHost)
             {
                 if (!notifySent)
                 {
