@@ -14,7 +14,16 @@ namespace LeTwitchBot.Utilities
                 client.JoinChannel(LeTwitchBot.HostChannelName);
             }
 
-            client.SendMessage(LeTwitchBot.HostChannelName, message, dryRun);
+            try
+            {
+                client.SendMessage(LeTwitchBot.HostChannelName, message, dryRun);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("Error, bot couldn't send the message.");
+            }
         }
     }
 }
