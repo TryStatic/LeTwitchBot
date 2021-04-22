@@ -61,7 +61,7 @@ namespace LeTwitchBot.Handlers
                 return;
             }
 
-            GetChannelInformationResponse existingInfo = await LeTwitchBot.HostAPI.Helix.Channels.GetChannelInformationAsync(user.Id);
+            GetChannelInformationResponse existingInfo = await LeTwitchBot.BotAPI.Helix.Channels.GetChannelInformationAsync(user.Id);
             if (existingInfo.Data.Length <= 0) return;
             ChannelInformation info = existingInfo.Data[0];
 
@@ -69,6 +69,7 @@ namespace LeTwitchBot.Handlers
             if (gameResponse.Games.Length <= 0)
             {
                 LeTwitchBot.TwitchClient.SendHostChannelMessage($"Couldn't locate {newGame} :( :( :( :( ");
+                return;
             }
 
             Game tehGame = gameResponse.Games[0];
@@ -110,7 +111,7 @@ namespace LeTwitchBot.Handlers
                 return;
             }
 
-            GetChannelInformationResponse existingInfo = await LeTwitchBot.HostAPI.Helix.Channels.GetChannelInformationAsync(user.Id);
+            GetChannelInformationResponse existingInfo = await LeTwitchBot.BotAPI.Helix.Channels.GetChannelInformationAsync(user.Id);
             if(existingInfo.Data.Length <= 0) return;
             ChannelInformation info = existingInfo.Data[0];
 

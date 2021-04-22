@@ -24,8 +24,11 @@ namespace LeTwitchBot
         public static void InitializeBot(Secrets secrets)
         {
             Secrets = secrets;
+
             HostChannelName = secrets.HostChannelName;
             TMICredentials = new ConnectionCredentials(secrets.HostChannelName, secrets.BotTMIOAuthKey);
+
+
             TwitchClient = new TwitchClient();
             
             TwitchClient.Initialize(TMICredentials, secrets.HostChannelName);
@@ -41,6 +44,8 @@ namespace LeTwitchBot
                 Console.WriteLine("Twitch Client was not able to connect.");
                 return;
             }
+
+            TwitchClient.JoinChannel(secrets.HostChannelName);
 
             BotAPI = new TwitchAPI();
             BotAPI.Settings.ClientId = Secrets.BotClientID;
