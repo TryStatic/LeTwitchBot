@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Media;
+using LeTwitchBot.Data;
+using LeTwitchBot.Data.Models;
 using LeTwitchBot.Utilities;
 using TwitchLib.Api.Helix.Models.Channels.GetChannelInformation;
 using TwitchLib.Api.Helix.Models.Channels.ModifyChannelInformation;
@@ -40,15 +43,93 @@ namespace LeTwitchBot.Handlers
                 case "followtime":
                     HandleFollowTime(sender, e);
                     break;
+                case "task":
+                    HandleTaskCommand(sender, e);
+                    break;
+                case "currency":
+                    HandleCurrencyCommand(sender, e);
+                    break;
+                case "firstvisit":
+                    HandleFirstVisitCommand(sender, e);
+                    break;
             }
+        }
+
+        private void HandleFirstVisitCommand(object sender, OnChatCommandReceivedArgs onChatCommandReceivedArgs)
+        {
+            if (!(sender is TwitchClient senderClient)) return;
+
+            using var storage = new Storage();
+            ChannelVisitor visitor = storage.Visitors.FirstOrDefault(s => s.TwitchUsername.ToLower() == senderClient.TwitchUsername.ToLower());
+            if(visitor == null) return;
+
+            LeTwitchBot.TwitchClient.SendHostChannelMessage(
+                $"Hey @{senderClient.TwitchUsername}. Your first visit to @{LeTwitchBot.HostChannelName} was on {visitor.DateAdded:dddd, dd MMMM yyyy}");
+
+        }
+
+        private void HandleCurrencyCommand(object sender, OnChatCommandReceivedArgs e)
+        {
+            if (!(sender is TwitchClient senderClient)) return;
+
+            if (e.Command.ArgumentsAsList.Count == 0)
+            {
+                int? currency = CurrencyHandler.GetUserCurrency(senderClient.TwitchUsername);
+
+                if (!currency.HasValue) return;
+
+                LeTwitchBot.TwitchClient.SendHostChannelMessage($"You have {currency.Value} currency @{senderClient.TwitchUsername}");
+            }
+            else
+            {
+                var username = e.Command.ArgumentsAsList[0];
+                if (username.Length > 0 && username[0] == '@')
+                {
+                    username = username.Substring(1);
+                }
+                int? currency = CurrencyHandler.GetUserCurrency(username);
+
+                if (!currency.HasValue) return;
+
+                LeTwitchBot.TwitchClient.SendHostChannelMessage($"@{username} has {currency.Value} currency @{senderClient.TwitchUsername}");
+            }
+
+        }
+
+        private string _currentTask = "";
+        private void HandleTaskCommand(object sender, OnChatCommandReceivedArgs e)
+        {
+            if (!(sender is TwitchClient senderClient)) return;
+
+            string taskText = e.Command.ArgumentsAsString;
+            if (string.IsNullOrEmpty(taskText))
+            {
+                if (string.IsNullOrEmpty(_currentTask))
+                {
+                    LeTwitchBot.TwitchClient.SendHostChannelMessage("No current task set by the broadcaster.");
+                    return;
+                }
+
+                LeTwitchBot.TwitchClient.SendHostChannelMessage("Current task is: " + _currentTask);
+                return;
+            }
+
+            if (!Extensions.IsHost(senderClient.TwitchUsername))
+            {
+                return;
+            }
+
+            _currentTask = taskText;
+            LeTwitchBot.TwitchClient.SendHostChannelMessage("Current task has been set to: " + _currentTask);
         }
 
         private async void HandleSetGame(object sender, OnChatCommandReceivedArgs e)
         {
             if (!(sender is TwitchClient senderClient)) return;
 
+            if(!Extensions.IsHost(senderClient.TwitchUsername)) return;
+
             string newGame = e.Command.ArgumentsAsString;
-            Console.WriteLine(newGame);
 
             if (newGame == null || newGame.Length <= 0) return;
 
@@ -97,8 +178,9 @@ namespace LeTwitchBot.Handlers
         {
             if (!(sender is TwitchClient senderClient)) return;
 
+            if (!Extensions.IsHost(senderClient.TwitchUsername)) return;
+
             string newTitle = e.Command.ArgumentsAsString;
-            Console.WriteLine(newTitle);
 
             if(newTitle == null || newTitle.Length <= 0) return;
 

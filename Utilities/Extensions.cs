@@ -25,5 +25,11 @@ namespace LeTwitchBot.Utilities
                 Console.WriteLine("Error, bot couldn't send the message.");
             }
         }
+
+
+        public static bool IsHost(string user)
+        {
+            return string.Equals(user, LeTwitchBot.HostChannelName, StringComparison.InvariantCultureIgnoreCase);
+        }
     }
 }

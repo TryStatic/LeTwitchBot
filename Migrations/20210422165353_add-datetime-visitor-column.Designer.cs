@@ -3,14 +3,16 @@ using System;
 using LeTwitchBot.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LeTwitchBot.Migrations
 {
     [DbContext(typeof(Storage))]
-    partial class StorageModelSnapshot : ModelSnapshot
+    [Migration("20210422165353_add-datetime-visitor-column")]
+    partial class adddatetimevisitorcolumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

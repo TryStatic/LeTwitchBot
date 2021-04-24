@@ -19,6 +19,8 @@ namespace LeTwitchBot
 
         internal static CommandsHandler CommandsHandler;
         internal static VisitorTracker VisitorTracker;
+        internal static CurrencyHandler CurrencyHandler;
+
 
 
         public static void InitializeBot(Secrets secrets)
@@ -58,12 +60,13 @@ namespace LeTwitchBot
 
             CommandsHandler = new CommandsHandler();
             VisitorTracker = new VisitorTracker();
+            CurrencyHandler = new CurrencyHandler();
+
 
             TwitchClient.OnLog += OnLog;
         }
 
+
         private static void OnLog(object sender, OnLogArgs e) => Console.WriteLine($"{e.DateTime}: {e.BotUsername} - {e.Data}");
     }
-
-
 }
